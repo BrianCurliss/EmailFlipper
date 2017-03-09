@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Pricing Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!--  http://www.bootstraptoggle.com/-->
+  <link rel="stylesheet" href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap2-toggle.min.css">
+  <style>
+    body {
+      padding-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <a class="navbar-brand pull-left push-span" href="/">
+          <img alt="Brand" src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/2515/small/1415131967/maillift-sticker.png" style="height:40px">
+        </a>
+        <div class="pull-right">
+          <a href="https://www.linkedin.com/in/briancurliss" class="brand">Developed by Brian</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <!--<li onclick="setParamaterValues(); return false;" id="setParamaterValues">Update</li>-->
+        </ul>
+      </div>
+    </div>
+
+    <!--Page Title/Heading-->
+    <div class="page-header">
+      <h1>Pricing Calculator</h1>
+    </div>
+
+    <div id="homeDiv" class="row">
+
+      <!--Left Sidebar-->
+      <div class="span3">
+        <ul class="nav nav-list well">
+          <li class="nav-header">Create/Update Lead in Freshsales</li>
+          <li>
+            <label for="company">Company <span style="float: right; margin-right: 20px;"><a href="#">Search Freshsales</a></span></label>
+            <input type="text" id="company">
+            <br>
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" value="" />
+            <br>
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" value="" />
+            <br>
+            <label for="email">User Email (what email did they signup with)</label>
+            <input type="text" id="email" value="" />
+            <br>
+            <label for="email">Contact Email (if different)</label>
+            <input type="text" id="contactEmail" />
+            <br>
+            <label for="email">Account Manager</label>
+            <input type="text" id="accountManager" />
+            <br>
+            <label style="margin-top: 10px;" for="creditCardOnFile">
+              <input type="checkbox" id="creditCardOnFile" value="true" />
+              <button style="float: right; margin-right: 20px;">Save</button>
+              Card on file
+            </label>
+            <br>
+          </li>
+        </ul>
+      </div>
+
+      <!--Main/Center Content-->
+      <div class="span5">
+        <form>
+          <div>
+            <div class="wrapper">
+              <h3>
+                <div id="priceHeader">Price per letter: <b>$7.50</b></div>
+              </h3>
+              <br>
+              <div class="row">
+                <div class="span6">
+                  <div class="row-fluid">
+                    <div class="span4">
+                      <label for="stationery">Campaign Type</label>
+                      <select class="input-medium" id="stationery">
+                        <option value="s2">Sales Enablement</option>
+                        <option value="s2">Standard Bi-fold</option>
+                        <option value="s4">Postcard</option>
+                        <option value="s4" selected>Letter & Swag</option>
+                        <option value="s5">Envelope Only</option>
+                        <option value="s4">Signature Only</option>
+                        <option value="s3">Longform Content</option>
+                      </select>
+                    </div>
+                    <div class="span3 form-inline">
+                      <input type="checkbox" id="qualityControl" value=".75" checked="">
+                      <label for="qualityControl">Quality Control</label>
+                    </div>
+                    <div class="span3 form-inline">
+                      <input type="checkbox" id="customLogo" value=".29">
+                      <label for="customLogo">Logo Printing</label>
+                    </div>
+                    <div class="span3 form-inline">
+                      <input type="checkbox" id="customLogo" value=".29" checked="">
+                      <label for="customLogo">Integration(s)</label>
+                    </div>
+                    <div class="span3 form-inline">
+                      <input type="checkbox" id="customLogo" value=".29" checked="">
+                      <label for="customLogo">Postmark Perfect</label>
+                      <!-- if swag, show swag items instead of postmark option -->
+                    </div>
+                  </div>
+                  <br>
+                </div>
+                <div class="span6">
+                  <div class="row-fluid">
+                    <div class="span5">
+                      <div class="row-fluid">
+                        <div class="span6">
+                          <label for="numLetters">Content <a href="#">(+)</a></label>
+                          <div class="input-append">
+                            <input class="span6" id="wordCount" type="number" value="35">
+                            <span class="add-on">words</span>
+                          </div>
+                        </div>
+                        <div class="span6">
+                          <!-- Support Ranges -->
+                          <label for="numLetters">Quanity</label>
+                          <!--Change word from "Billing" based on prior selection-->
+                          <!--<input type="number" id="numLetters" class="input-small" data-size="small" value="200">-->
+                          <!-- if less than 40, give notice that dashboard only-->
+                          <div class="input-append">
+                            <input class="span7" id="numLetters" type="number" value="200">
+                            <span class="add-on">letters</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="span5">
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="numLetters">Frequency</label>
+                          <!--Change word from "Billing" based on prior selection-->
+                          <select id="stationery" class="input-small">
+                            <option value="s2">Daily</option>
+                            <option value="s4">Weekly</option>
+                            <option value="s2" selected>Monthly</option>
+                            <option value="s5">Quartely</option>
+                            <option value="s4">Annually</option>
+                          </select>
+                        </div>
+                        <div class="span5">
+                          <label for="billing">Billing</label>
+                          <select class="input-medium" id="billing">
+                            <option value="monthly">Pay-As-You-Go</option>
+                            <!-- if quanity is >300, monthly isn't option-->
+                            <option value="quarterly" selected>Quarterly</option>
+                            <option value="batch">Prepaid</option>
+                            <option value="batch">Batch</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <br>
+                </div>
+                <div class="span6">
+                  <div class="row-fluid">
+                    <ul class="nav nav-tabs" id="pricingTabs">
+                      <li>
+                        <a href="#all">All</a>
+                      </li>
+                      <li>
+                        <a href="#swag">Swag</a>
+                      </li>
+                      <li>
+                        <a href="#shipping">Shipping</a>
+                      </li>
+                      <li>
+                        <a href="#international">International</a>
+                      </li>
+                      <li>
+                        <a href="#integration">Integration</a>
+                      </li>
+                      <!--<li>-->
+                      <!--  <a href="#upsells">Upsells</a>-->
+                      <!--</li>-->
+                      <li>
+                        <a href="#fees">Fees</a>
+                        <!-- Ability to waive fees -->
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="tab-content pull-left">
+                  <!-- ALL -->
+                  <div class="span6 tab-pane active" id="all">
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="stamps">Stamps</label>
+                          <select id="stamps">
+                            <option value="stampsFirstClass" selected>First Class Stamps</option>
+                            <option value="stampsNone">Lots of Stamps</option>
+                            <option value="stampsNone">No Stamps</option>
+                          </select>
+                        </div>
+                        <div class="span5">
+                          <label for="mailers">Mailers</label>
+                          <select id="mailers">
+                            <option>bubble mailer</option>
+                            <option>poly mailer</option>
+                            <option>flat rate envelope (handwritten label)</option>
+                            <option>Flat Rate Envelope (Printed Label)</option>
+                            <option>Flat rate boxes</option>
+                            <option>boxes (custom quote needed)</option>
+                            <option value="0" selected>none</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Postmark Perfect</label>
+                          <select id="postmarkPerfect">
+                            <option value="pmpNA" selected>No PMP (Austin)</option>
+                            <option value="pmpNA">No PMP (Swag)</option>
+                            <option value="pmpFREE">Austin, SF, New York</option>
+                            <option value="pmpRTS">Return to Sender</option>
+                            <option value="pmp20">$20 for a single batch</option>
+                            <option value="pmp50">$50/mo for once per week</option>
+                            <option value="pmp100">$100/mo for twice per week</option>
+                            <option value="pmp200">$200/mo for every weekday</option>
+                            <option value="pmpInternational">International Quote Request</option>
+                          </select>
+                        </div>
+                        <div class="span5 form-inline">
+                          <label for="stationery">Stationery</label>
+                          <select id="stationery">
+                            <option value="s1">Premium Tri-Fold: Crane &amp; Co</option>
+                            <option value="s2" selected>Standard Bi-fold</option>
+                            <option value="s3">Premium Bi-fold</option>
+                            <option value="s5">Envelope Only</option>
+                            <option value="s4">Customer Provided Postcard</option>
+                            <option value="s6">Providing their own stationery</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Quality Control</label>
+                          <select id="">
+                            <option value="" selected>Make Selection</option>
+                            <option value="pmpNA">No PMP (Swag)</option>
+                            <option value="pmpFREE">Austin, SF, New York</option>
+                            <option value="pmpRTS">Return to Sender</option>
+                            <option value="pmp20">$20 for a single batch</option>
+                            <option value="pmp50">$50/mo for once per week</option>
+                            <option value="pmp100">$100/mo for twice per week</option>
+                            <option value="pmp200">$200/mo for every weekday</option>
+                            <option value="pmpInternational">International Quote Request</option>
+                          </select>
+                        </div>
+                        <div class="span5 form-inline">
+                          <label for="stationery">Photo Assurance</label>
+                          <select id="">
+                            <option value="s1">Premium Tri-Fold: Crane &amp; Co</option>
+                            <option value="" selected>Make Selection</option>
+                            <option value="s3">Premium Bi-fold</option>
+                            <option value="s5">Envelope Only</option>
+                            <option value="s4">Customer Provided Postcard</option>
+                            <option value="s6">Providing their own stationery</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Integrations</label>
+                          <select id="">
+                            <option value="" selected>Make Selection</option>
+                            <option value="pmpNA">No PMP (Swag)</option>
+                            <option value="pmpFREE">Austin, SF, New York</option>
+                            <option value="pmpRTS">Return to Sender</option>
+                            <option value="pmp20">$20 for a single batch</option>
+                            <option value="pmp50">$50/mo for once per week</option>
+                            <option value="pmp100">$100/mo for twice per week</option>
+                            <option value="pmp200">$200/mo for every weekday</option>
+                            <option value="pmpInternational">International Quote Request</option>
+                          </select>
+                        </div>
+                        <div class="span5 form-inline">
+                          <label for="stationery">Postmark Perfect</label>
+                          <select id="">
+                            <option value="s1">Premium Tri-Fold: Crane &amp; Co</option>
+                            <option value="" selected>Make Selection</option>
+                            <option value="s3">Premium Bi-fold</option>
+                            <option value="s5">Envelope Only</option>
+                            <option value="s4">Customer Provided Postcard</option>
+                            <option value="s6">Providing their own stationery</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Logo Printing</label>
+                          <select id="">
+                            <option value="" selected>Make Selection</option>
+                            <option value="pmpNA">No PMP (Swag)</option>
+                            <option value="pmpFREE">Austin, SF, New York</option>
+                            <option value="pmpRTS">Return to Sender</option>
+                            <option value="pmp20">$20 for a single batch</option>
+                            <option value="pmp50">$50/mo for once per week</option>
+                            <option value="pmp100">$100/mo for twice per week</option>
+                            <option value="pmp200">$200/mo for every weekday</option>
+                            <option value="pmpInternational">International Quote Request</option>
+                          </select>
+                        </div>
+                        <div class="span5 form-inline">
+                          <label for="stationery">Writing Area</label>
+                          <select id="">
+                            <option value="" selected>Make Selection</option>
+                            <option value="s1">Postcard Only</option>
+                            <option value="s3">Envelope Only</option>
+                            <option value="s5">Signature Only</option>
+                            <option value="s4">Customer Provided Postcard</option>
+                            <option value="s6">Providing their own stationery</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SWAG -->
+                  <div class="span6 tab-pane" id="swag">
+                    <div class="form-inline">
+                      <div class="row-fluid">
+                        <div class="span5 form-inline">
+                          <input type="checkbox" checked data-toggle="toggle" data-on="Swag" data-off="No Swag" data-size="small" id="" value=".10">
+                          <br>
+                          <br>
+                        </div>
+                        <div class="span5 form-inline">
+                          <form class="form-inline">
+                            <input type="text" class="input-medium" placeholder="Search Amazon">
+                            <button type="" class="btn">Find</button>
+                          </form>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="stamps">Stamps</label>
+                          <select id="stamps">
+                            <option selected="" value="stampsFirstClass">Stamps.com Shipping Labels</option>
+                            <option value="stampsNone">Lots of Stamps</option>
+                            <option value="stampsNone">No Stamps</option>
+                          </select>
+                        </div>
+                        <div class="span5">
+                          <label for="mailers">Mailers</label>
+                          <!--shipping cost can't be guessed until we have list/addreesses-->
+                          <select id="mailers">
+                            <option value="5. ">bubble mailer</option>
+                            <option value="5.00">poly mailer</option>
+                            <option value="5.75">flat rate envelope (handwritten label)</option>
+                            <!--alert user of potinial prblems with post office -->
+                            <option value="0" selected="">Flat Rate Envelope (Printed Label)</option>
+                            <option value="5.00">Flat rate boxes</option>
+                            <option value="0">boxes (custom quote needed)</option>
+                            <!--Boxes depends -->
+                            <option value="0">none</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Postmark Perfect</label>
+                          <!-- ask location fist, then frequency -->
+                          <!-- ABILITY TO SELECT SPECIFIC PMP LOCATION!!! -->
+                          <select id="postmarkPerfect">
+                            <option value="pmpNA">No PMP (Austin)</option>
+                            <option value="pmpNA" selected="">No PMP (Swag)</option>
+                            <option value="pmpFREE">Austin, SF, New York</option>
+                            <option value="pmpRTS">Return to Sender</option>
+                            <option value="pmp20">$20 for a single batch</option>
+                            <option value="pmp50">$50/mo for once per week</option>
+                            <option value="pmp100">$100/mo for twice per week</option>
+                            <option value="pmp200">$200/mo for every weekday</option>
+                            <option value="pmpInternational">International Quote Request</option>
+                          </select>
+                        </div>
+                        <div class="span5 form-inline">
+                          <br>
+                          <input type="checkbox" id="dropInCard" value=".10">
+                          <label for="dropInCard">Insert / Drop-In</label>
+                          <!-- make this a drop down -->
+                          <br>
+                          <input type="checkbox" id="addOnSwag" value="1.50">
+                          <label for="addOnSwag">Large Swag (t-shirt, book, etc) </label>
+                          <!-- make this a drop down -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- INTERNATIONAL -->
+                  <div class="span6 tab-pane" id="international">
+                    <div class="form-inline">
+                      <div class="row-fluid">
+                        <div class="span5 form-inline">
+                          <input type="checkbox" checked data-toggle="toggle" data-on="USA" data-off="International" data-offstyle="success" data-size="small" id="" value=".10">
+                          <br>
+                          <br>
+                        </div>
+                        <div class="span5">
+                          <div class="input-append">
+                            <input class="span3" id="appendedInput" type="number" value="0">
+                            <span class="add-on">% International Recipients</span>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Postmark Perfect</label>
+                          <!-- ask location fist, then frequency -->
+                          <select id="">
+                            <option value="" selected>International Quote Request</option>
+                            <option>No International PMP</option>
+                          </select>
+                        </div>
+                        <div class="span5">
+                          <label for="stamps">Stamps</label>
+                          <select id="">
+                            <option selected="" value="stampsLabels">USA/International (As Needed)</option>
+                            <option value="stampsNone">Stamps for a Specific Country</option>
+                            <option value="stampsNone">No Stamps</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="numLetters">Location for PMP Quote</label>
+                          <input type="number" id="numLetters" value="">
+                        </div>
+                        <div class="span5">
+                          <label for="numLetters">Contry Location for Stamps Quote</label>
+                          <input type="number" id="numLetters" value="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- INTEGRATIONS -->
+                  <div class="span6 tab-pane" id="integration">
+                    <div class="form-inline">
+                      <div class="row-fluid">
+                        <div class="span5 form-inline">
+                          <input type="checkbox" checked data-toggle="toggle" data-on="Integration" data-off="CSV" data-offstyle="success" data-size="small" id="dropInCard" value=".10">
+                          <br>
+                          <br>
+                        </div>
+                        <!--CSV weekly Recurring can have weekly CSV, not just integration-->
+                        <div class="span5">
+                          <div class="input-append">
+                            <input class="span3" id="appendedInput" type="number" value="0">
+                            <span class="add-on">% Integration Recipients</span>
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="postmarkPerfect">Postmark Perfect</label>
+                          <!--ask location fist, then frequency-->
+                          <select id="postmarkPerfect">
+                            <option value="pmpInternational" selected>International Quote Request</option>
+                            <option value="pmpInternational">No International PMP</option>
+                          </select>
+                        </div>
+                        <div class="span5">
+                          <label for="stamps">Stamps</label>
+                          <select id="">
+                            <option selected="" value="stampsLabels">USA/International (As Needed)</option>
+                            <option value="stampsNone">Stamps for a Specific Country</option>
+                            <option value="stampsNone">No Stamps</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row-fluid">
+                        <div class="span5">
+                          <label for="numLetters">Location for PMP Quote</label>
+                          <input type="number" id="numLetters" value="">
+                        </div>
+                        <div class="span5">
+                          <label for="numLetters">Contry Location for Stamps Quote</label>
+                          <input type="number" id="numLetters" value="">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SHIPPING -->
+                  <div class="span6 tab-pane" id="shipping">shipping</div>
+                  <!-- FEES -->
+                  <div class="span6 tab-pane" id="fees">fees</div>
+                </div>
+
+              </div>
+            </div>
+            <br>
+            <!--<input type="submit" value="submit">-->
+          </div>
+        </form>
+      </div>
+
+      <!--Left Sidebar-->
+      <div class="span4">
+        <ul class="nav well">
+          <ul class="nav nav-pills small">
+            <li class="active"><a href="#">Notes</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      Quotes & Orders
+                      <b class="caret"></b>
+                    </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Save as Quote</a></li>
+                <!-- https://apidocs.chargebee.com/docs/api/estimates -->
+                <!-- https://developer.intuit.com/v2/ui#/emulator?workflow=ecommerce -->
+                <li><a href="#">Past Quotes</a></li>
+                <li><a href="#">Past Orders</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      More
+                      <b class="caret"></b>
+                    </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">ROI Calculations</a></li>
+                <li><a href="#">Create Sample Pack</a></li>
+                <!--Open Canva for us to create sample-->
+                <li><a href="#">Convert to Campaign</a></li>
+                <li><a href="#">Convert to Order Card</a></li>
+                <li><a href="#">Post to #orders in Slack</a></li>
+              </ul>
+            </li>
+          </ul>
+          <textarea style="width:95%" rows="20" id="accountNotes"></textarea>
+          <button style="float: right;">Save Notes</button>
+          <br>
+          <br>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="/js/require/jquery.min.js"></script>
+<script src="/js/require/bootstrap.min.js"></script>
+
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.min.js"></script>
+
+<script src="/js/ux.js"></script>
+<script src="/js/pricing-calculator.js"></script>
+
+<script src="/js/api/sheetsu.js"></script>
+<script src="/js/api/airtable.js"></script>
+
+<script src="/js/paramaters/pricing.js"></script>
+<script>
+  $(function() {
+    $('#pricingTabs a').click(function(e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+  });
+</script>
+
+</html>
+
+
+<script>
+  // <!--
+  //   			        <input type="checkbox" id="setupFee" />
+  //   			        <label for="setupFee">Waive Setup fee</label>
+  //   			        <br>
+  //               	// does the letter go out as their ready or all at once?
+  //               	// pen color
+  //               	// SLA
+  //               	// SoW
+  //               	Stationery Type
+  //               	  - Full Bleed?
+  //               	  - Size (a2, a5, a6)
+  //               	  - Quality
+  //             	  Address Formating?
+  //             	  International Address Formating?
+  //             	  Overages (do we want to allow them to have a credit)?
+  //             	  Tracking Notification Email = $0.65 	only available if shipping swag with a printed shipping label
+  //                 Handwritten Signature = $0.50
+  //                 Address Lookup
+  //                   • $1 for address lookup if recurring plan
+  //                   • consider monthly fee for address looking in the future ($50 for 100 / mo)
+  //                 International Pricing Support for Canada & Australia 
+  //                 batches do not qualifty for  10% off for 2-30 day turnaround 
+  //                 turnaround time requested (next day? 1 week?)
+  //                 providing USPS/FedEx/UPS #?
+  //                 Multiple PMP Support?
+  //               	-->
+
+
+
+
+
+
+
+
+  // <!--Page Tabs-->
+  // <!--<ul class="nav navbar-nav">-->
+  // <!--  <li id="toggleCustomers"><a href="javascript:void(0)">Customers</a></li>-->
+  // <!--</ul>-->
+
+
+
+
+
+
+  // <!--<hr>-->
+  // <!--<div id="price">The customer's price per letter is $7.50 and their base price is $4.50.</div>-->
+  // <!--<br>-->
+  // <!--<div id="monthly"></div>-->
+  // <!--<div id="quarterly">The customer's quarterly price is $4500 per billing cycle (every 3 months). The customer should expect to pay around $0 at the beginning of each month for overages. There is also a one time setup fee of $250</div>-->
+  // <!--<div id="batch"></div>-->
+  // <!--<br>-->
+  // <!--<div id="confidence">Confidence: 75%</div>-->
+  // <!--<div id="expectedTurnaround">The recipient should expect to receive the letter in 2 to 3 business days</div>-->
+  // <!--<br>-->
+  // <!--<div id="profit">This quarterly account is expected to generate $18000.00 in one time revenue.-->
+  // <!--  <br>We profit $9003.33 at a 50% profit margin. They save 8 hours of work by using MailLift.</div>-->
+  // <!--<hr>-->
+  // <!--<h4> Help Our Customer Find Their MailLift ROI </h4>-->
+  // <!--<form>-->
+  // <!--  <label for="annualRevenue">How much is a new customer worth? </label>-->
+  // <!--  <input type="number" id="annualRevenue" value="500" width="50">-->
+  // <!--  <br>-->
+  // <!--  <input type="checkbox" id="monthlyRevenue" checked="">-->
+  // <!--  <label for="monthlyRevenue">Is this revenue recurring monthly?</label>-->
+  // <!--  <br>-->
+  // <!--  <br>-->
+  // <!--</form>-->
+  // <!--<div id="customerROI">If 1% of their letters lead to a sale (2 out of their 200), they'll earn an ROI of <b>8x</b>.-->
+  // <!--  <br>-->
+  // <!--  <br>This is found by taking the annual value of our customer's customer and dividing their price by the price per letter we are charging for this campaign ($7.50) and then divided by 100 to get multiple.</div>-->
+
+
+
+
+
+
+
+
+
+
+  // <!--        <div class="span6"><hr>-->
+  // <!--    <div class="row-fluid">-->
+  // <!--         <div class="span5">-->
+  // <!--            <label for="stamps">Stamps</label>-->
+  // <!--	        <select id="stamps">-->
+  // <!--	        	<option selected="" value="stampsFirstClass">First Class Forever Stamp</option>-->
+  // <!--	            <option value="stampsCustom">Client Provided Custom Stamps</option>-->
+  // <!--	            <option value="stampsLabels">Stamps.com Shipping Labels</option>-->
+  // <!--	            <option value="stampsCanada">All Canadian Stamps</option>-->
+  // <!--	            <option value="stampsInternational">All International Stamps</option>-->
+  // <!--	            <option value="stampsNone">No Stamps</option>-->
+  // <!--	        </select>-->
+  // <!--        </div>-->
+  // <!--        <div class="span5">-->
+  // <!--            <label for="mailers">Mailers</label>		        <!--shipping cost can't be guessed until we have list/addreesses-->
+  // <!--	        <select id="mailers">-->
+  // <!--	        	<option value="5. ">bubble mailer</option>-->
+  // <!--	            <option value="5.00">poly mailer</option>-->
+  // <!--	            <option value="5.75">flat rate envelope (handwritten label)</option>-->
+  // <!--	            <option value="5.05">flat rate envelope (printed label)</option>-->
+  // <!--	            <option value="5.00">flat rate boxes</option>-->
+  // <!--	            <option value="0">boxes (custom quote needed)</option>				<!--Boxes depends -->
+  // <!--	            <option value="0" selected="">none</option>-->
+  // <!--	        </select>-->
+  // <!--        </div>-->
+  // <!--    </div>-->
+  // <!--</div>-->
+
+
+
+  // <!--<div class="span6">-->
+
+  // <!--  <ul class="nav nav-tabs">-->
+  // <!--    <li>-->
+  // <!--      <a href="#">Overview</a>-->
+  // <!--    </li>-->
+  // <!--    <li class="dropdown">-->
+  // <!--      <a class="dropdown-toggle"-->
+  // <!--         data-toggle="dropdown"-->
+  // <!--         href="#">-->
+  // <!--          Presets-->
+  // <!--          <b class="caret"></b>-->
+  // <!--      </a>-->
+  // <!--      <ul class="dropdown-menu">-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Basic</a>-->
+  // <!--        </li>-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Postcard</a>-->
+  // <!--        </li>-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Letter + Swag</a>-->
+  // <!--        </li>-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Writing Only</a>-->
+  // <!--        </li>-->
+  // <!--      </ul>-->
+  // <!--    </li>-->
+  // <!--    <li>-->
+  // <!--          <a href="#">Billing</a>-->
+  // <!--        </li>-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Stationery</a>-->
+  // <!--    </li>-->
+
+  // <!--    <li class="dropdown">-->
+  // <!--      <a class="dropdown-toggle"-->
+  // <!--         data-toggle="dropdown"-->
+  // <!--         href="#">-->
+  // <!--          Upsells-->
+  // <!--          <b class="caret"></b>-->
+  // <!--      </a>-->
+  // <!--      <ul class="dropdown-menu">-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Adress Validation</a>-->
+  // <!--        </li>-->
+  // <!--        <li>-->
+  // <!--          <a href="#">Postmark Perfect</a>-->
+  // <!--        </li>-->
+  // <!--      </ul>-->
+  // <!--    </li>-->
+
+  // <!--  </ul>-->
+  // <!--</div>          -->
+
+
+
+
+
+
+
+
+
+
+
+
+  // <!--<div id="options">-->
+
+  // <!--</div>-->
+  // <!--  <div class="span6">-->
+  // <!--    <div class="row-fluid">-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="stationery">Stationery</label>-->
+  // <!--        <select id="stationery">-->
+  // <!--          <option value="s1">Premium Tri-Fold: Crane &amp; Co</option>-->
+  // <!--          <option value="s2" selected="">Standard Bi-fold</option>-->
+  // <!--          <option value="s3">Premium Bi-fold</option>-->
+  // <!--          <option value="s5">Envelope Only</option>-->
+  // <!--          <option value="s4">Customer Provided Postcard</option>-->
+  // <!--          <option value="s6">Providing their own stationery</option>-->
+  // <!--        </select>-->
+  // <!--      </div>-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="colorEnvelope">Envelope</label>-->
+  // <!--        <select id="colorEnvelope">-->
+  // <!--            <option value="standard" selected="">Bright White</option>-->
+  // <!--            <option value="Navy">Navy (+$0.50)</option>-->
+  // <!--            <option value="Purple">Purple (+$0.50)</option>-->
+  // <!--            <option value="Mandarin">Mandarin (+$0.50)</option>-->
+  // <!--            <option value="Tangerine">Tangerine (+$0.50)</option>-->
+  // <!--            <option value="RubyRed">Ruby Red (+$0.50)</option>-->
+  // <!--            <option value="Black">Black (+$0.50)</option>-->
+  // <!--            <option value="custom">Custom Color (+$0.65)</option>-->
+  // <!--          </select>-->
+  // <!--      </div>-->
+  // <!--    </div>-->
+  // <!--  </div>-->
+  // <!--  <div class="span6">-->
+  // <!--    <div class="row-fluid">-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="billing">Turnaround Time</label>-->
+  // <!--        <select id="turnaround">-->
+  // <!--            <option value="turnaroundStandard">2-5 Business Days (free)</option>-->
+  // <!--            <option value="turnaround3DayRush">3 Business Days (+$3)</option>-->
+  // <!--            <option value="turnaroundAnytime">Anytime (10% discount)</option>-->
+  // <!--          </select>-->
+  // <!--      </div>-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="integration">Integration</label>-->
+  // <!--        <select id="colorEnvelope">-->
+  // <!--            <option value="standard" selected="">None</option>-->
+  // <!--            <option value="RubyRed">Salesforce</option>-->
+  // <!--            <option value="Black">HubSpot</option>-->
+  // <!--            <option value="custom">Infusionsoft</option>-->
+  // <!--          </select>-->
+  // <!--      </div>-->
+  // <!--    </div>-->
+  // <!--  </div>-->
+  // <!--  <div class="span6">-->
+  // <!--    <div class="row-fluid">-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="discount">Is there a discount you're giving?</label>-->
+  // <!--        <input type="number" id="discount" value="0">-->
+  // <!--      </div>-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="numLetters"># of Letters Expected Monthly</label>-->
+  // <!--        <input type="number" id="numLetters" value="200">-->
+  // <!--      </div>-->
+  // <!--    </div>-->
+  // <!--  </div>-->
+  // <!--  <div class="span6">-->
+  // <!--    <div class="row-fluid">-->
+  // <!--      <div class="span5">-->
+  // <!--        <input type="checkbox" id="envelopeAddressing" checked="">-->
+  // <!--        <label for="envelopeAddressing">Envelope addressed? ($0.50)</label>-->
+  // <!--      </div>-->
+  // <!--      <div class="span5">-->
+  // <!--        <input type="checkbox" id="envelopeWanted" checked="">-->
+  // <!--        <label for="envelopeWanted">Customer want envelopes? ($0.75)</label>-->
+  // <!--      </div>-->
+  // <!--    </div>-->
+  // <!--  </div>-->
+  // <!--  <div class="span6">-->
+  // <!--    <div class="row-fluid">-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="integration">Address Data Enhancement</label>-->
+  // <!--        <select id="colorEnvelope">-->
+  // <!--            <option value="standard" selected="">None</option>-->
+  // <!--            <option value="ncoaValidation">NCOA Address Validation (+$0.25)</option>-->
+  // <!--            <option value="addressVerification">USA Business Address Verification ($1.00)</option>-->
+  // <!--            <option value="addressLookup">USA Business Address Lookup ($1.50)</option>-->
+  // <!--          </select>-->
+  // <!--      </div>-->
+  // <!--      <div class="span5">-->
+  // <!--        <label for="handwritingStyle">Handwriting Preference</label>-->
+  // <!--        <select id="handwritingStyle">-->
+  // <!--        <option value="noPreference">no preference</option>-->
+  // <!--        <option value="female" selected="">female</option>-->
+  // <!--        <option value="male">male</option>-->
+  // <!--        <option value="genderNeutral" selected="">gender neutral</option>-->
+  // <!--      </select>-->
+  // <!--      </div>-->
+  // <!--    </div>-->
+  // <!--  </div>-->
+  //
+</script>

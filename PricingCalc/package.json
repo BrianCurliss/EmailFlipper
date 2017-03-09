@@ -1,0 +1,14 @@
+{
+  "name": "Mirla",
+  "version": "0.0.0",
+  "description": "A project to help Mirla learn how to use JavaScript IRL.",
+  "main": "server.js",
+  "repository": "",
+  "author": "Mirla <mirla@maillift.com>",
+  "dependencies": {
+    "async": "~0.2.8",
+    "close.io": "0.0.3",
+    "express": "~3.2.4",
+    "request": "^2.74.0"
+  }
+}
