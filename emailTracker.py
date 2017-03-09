@@ -1,31 +1,32 @@
 import json
 from pprint import pprint
-#import urllib2
 import requests
 
 
 
 emailTpls = []
+    rcrtrKeywords = ['hiring', 'c', 'c++', 'java', 'python', 'ruby', 'devoloper', 'dev-ops', 'script', 'bash', 'sql', 'mongodb']
+
 with open('payload.json') as json_data:
     emails = json.load(json_data, strict=False)
 
 for email in emails:
-
     emailTpls.append((email['addresses']['from'][0]['email'].encode('ascii', 'ignore'), email['bodies'][0]['content'].encode('ascii', 'ignore')))
 
-print emailTpls
-#print str(docs)
+#print emailTpls[0][0]
+emailTpls = emailTpls[1:]
 
-#emailDocs = []
-#for email in docs:
-#    emailDocs.append({"language": "en","id": "1","text": email})
-#reqData = {"documents": emailDocs}
+emailDocs = []
+for email in emailTpls:
+    # Each doc. passed to the Azure analytics API needs a unq id which will be the sender email
+    emailDocs.append({'language': 'en', 'id': str(email[0]), 'text': str(email[1])})
 
+reqData = {'documents': emailDocs}
+# TODO: Have to filter out emails that are toooooooo big (larger than 10240 bytes)
 
-#print str(reqData)
+headers = {'Ocp-Apim-Subscription-Key': '003ee666de544d798f77cdb16be13fed','Content-type': 'application/json', 'Accept': 'application/json'}
+r = requests.post('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases', data = str(reqData), headers=headers)
+emailKeyWords = json.loads(r.text)['documents']
 
-
-#headers = {'Ocp-Apim-Subscription-Key': '003ee666de544d798f77cdb16be13fed','Content-type': 'application/json', 'Accept': 'application/json'}
-#r = requests.post('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment', data = str(reqData), headers=headers)
-
-#print r.json()
+for eml_kywrds in emailKeyWords:
+    print eml_kywrds['keyPhrases']
