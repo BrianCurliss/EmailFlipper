@@ -5,7 +5,7 @@ import requests
 
 
 emailTpls = []
-    rcrtrKeywords = ['hiring', 'c', 'c++', 'java', 'python', 'ruby', 'devoloper', 'dev-ops', 'script', 'bash', 'sql', 'mongodb']
+rcrtrKeywords = ['hiring', 'c', 'c++', 'java', 'python', 'ruby', 'devoloper', 'dev-ops', 'script', 'bash', 'sql', 'mongodb', 'e-mail', 'spotlight']
 
 with open('payload.json') as json_data:
     emails = json.load(json_data, strict=False)
@@ -26,7 +26,15 @@ reqData = {'documents': emailDocs}
 
 headers = {'Ocp-Apim-Subscription-Key': '003ee666de544d798f77cdb16be13fed','Content-type': 'application/json', 'Accept': 'application/json'}
 r = requests.post('https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases', data = str(reqData), headers=headers)
-emailKeyWords = json.loads(r.text)['documents']
+# print r.text
+emailKeyWords = json.loads(r.text)
+emailKeyWords = emailKeyWords['documents'][0]['keyPhrases']
+#print emailKeyWords
+emailScores = []
 
-for eml_kywrds in emailKeyWords:
-    print eml_kywrds['keyPhrases']
+for x in range(len(emailKeyWords)):
+    emailScores.append(0)
+    for wrd in rcrtrKeywords:
+            emailScores[x] += emailKeyWords.count(wrd)
+
+print emailScores
